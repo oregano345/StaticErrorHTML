@@ -1,15 +1,4 @@
-from flask import Flask, render_template, Blueprint
-from flask_socketio import SocketIO
-import gevent
+from app import app, socketio
 
-if __name__ == '__main__':
-    socketio = SocketIO()
-    app = Flask(__name__)
-    socketio.init_app(app)
-    app.register_blueprint(Blueprint('HTMLDisp', __name__, url_prefix='/', template_folder='templates'))
-
-    @app.route('/')
-    def dispHTMLError():
-        return render_template("patience.html"), 200
-
+if __name__ == "__main__":
     socketio.run(app, host="0.0.0.0", port=5000)
